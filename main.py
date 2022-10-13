@@ -1,3 +1,13 @@
+from random import choice
+from math import fabs
+
+
+list_of_motivated = [
+    "You can do this! dont give up!",
+    "i believe in you!",
+    "remember, lazy is your worst enemy now!",
+]
+
 class User:
     def __init__(
         self, 
@@ -101,24 +111,16 @@ class User:
         2. перевести вес в каллории (1 кг жира — это 7700 калорий)
         3. рассчитать сколько каллорий в день пользователь может потреблять в сроки 3, 6, 12 месяцев
         '''
-        delta_weight = self.weight - self.goal
+        delta_weight = self.weight - self.goal        
+        delta_goal = 'out' if delta_weight > 0 else 'add'
+        result = f'you need to {delta_goal} some callories! in day: \n'
         
-        from math import fabs
+        months_len = [3, 6, 12]
         delta_weight_in_collories = fabs(delta_weight * 7700)
-        deltas = (
-            delta_weight_in_collories/(12*30), 
-            delta_weight_in_collories/(6*30), 
-            delta_weight_in_collories/(3*30)
-            )
-
-        if delta_weight > 0:
-            result = f'you need to out some callories in day!: \n'
-        else:
-            result = f'you need to add some callories! in day: \n'
-            
-        result += f' plan for 3 months : {deltas[0]} callories!\n'
-        result += f' plan for 6 months : {deltas[1]} callories!\n'
-        result += f' plan for 12 months : {deltas[2]} callories!\n'
+        get_delta = lambda months: int(delta_weight_in_collories/(months*30))
+        deltas = zip(months_len, map(get_delta, months_len))        
+        for item in deltas:
+            result += f' plan for {item[0]} months : {item[1]} callories!\n'
 
         print(result)
 
@@ -127,7 +129,8 @@ class User:
     def input_user_callories_day():
         user = input('how many callories do you eat everyday?: ')
         
-
+    def get_new_motivation(self):
+        return choice(list_of_motivated)
 
 def user_init(name: str = '', middle_name: str = '', last_name: str = '') -> User:
     name = name or input('Enter your name: ')
@@ -139,20 +142,16 @@ def user_init(name: str = '', middle_name: str = '', last_name: str = '') -> Use
 
 
 
+if __name__ == '__main__':
 
-    
-
-
-
-
-
-user = user_init('Artem', 'Vasilyevich', 'Popov')
-user.add_weight(80.0)
-user.add_growth(180)
-user.add_age(20)
-user.input_sex('male')
-user.base_metabolism()
-user.coeficient_activity_mtb(1.4)
-user.user_great_goal(70)
-print(user)
-user.plan_for_callories()
+    user = user_init('Artem', 'Vasilyevich', 'Popov')
+    user.add_weight(80.0)
+    user.add_growth(180)
+    user.add_age(20)
+    user.input_sex('male')
+    user.base_metabolism()
+    user.coeficient_activity_mtb(1.4)
+    user.user_great_goal(70)
+    print(user)
+    user.plan_for_callories()
+    print(user.get_new_motivation())
