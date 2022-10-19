@@ -151,7 +151,7 @@ if __name__ == '__main__':
     user.input_sex('male')
     user.base_metabolism()
     user.coeficient_activity_mtb(1.4)
-    user.user_great_goal(70)
+    user.user_great_goal(60)
     print(user)
     user.plan_for_callories()
     print(user.get_new_motivation())
