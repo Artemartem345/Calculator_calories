@@ -145,3 +145,7 @@ if __name__ == '__main__':
     print(user)
     user.plan_for_callories()
     print(user.get_new_motivation())
+
+
+def func0():
+    pass
