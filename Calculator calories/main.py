@@ -147,5 +147,3 @@ if __name__ == '__main__':
     print(user.get_new_motivation())
 
 
-def func0():
-    pass
