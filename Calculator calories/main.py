@@ -18,7 +18,7 @@ class User:
         weight:float = None,
         growth:str = None,
         sex:str = None,
-        age:str = None,
+        age:int = None,
         ):
         self.first_name = first_name
         self.middle_name = middle_name
@@ -28,9 +28,9 @@ class User:
         self.sex = self._input_sex(sex)
         self.age = age or input('Enter your age: ')
 
-    def _input_sex(self, sex:str = ''):
-        while not self.sex in ['male', 'female']:
-            self.sex = input('Enter your sex: ')
+    def _input_sex(self, sex:str = None) -> str:
+        while not sex in ['male', 'female']:
+            sex = input('Enter your sex: ')
         
 
     def __repr__(self) -> str:
@@ -53,7 +53,7 @@ class User:
         Для женщин:
         Базовый метаболизм = 9,99×(вес в кг) + 6,25×(рост в см) – 4,92×(возраст в годах) – 161.
         '''
-        base_mtb = 9.99 * self.weight + 6.25 * self.growth - 4.92 * self.age
+        base_mtb = 9.99 * float(self.weight) + 6.25 * float(self.growth) - 4.92 * int(self.age)
         if self.sex == 'male':
             # 9,99×(вес в кг) + 6,25×(рост в см) – 4,92×(возраст в годах) + 5
             base_mtb += 5
@@ -107,7 +107,7 @@ class User:
         2. перевести вес в каллории (1 кг жира — это 7700 калорий)
         3. рассчитать сколько каллорий в день пользователь может потреблять в сроки 3, 6, 12 месяцев
         '''
-        delta_weight = self.weight - self.goal        
+        delta_weight = float(self.weight) - float(self.goal)        
         delta_goal = 'out' if delta_weight > 0 else 'add'
         result = f'you need to {delta_goal} some callories! in day: \n'
         
@@ -142,6 +142,7 @@ if __name__ == '__main__':
     user.base_metabolism()
     user.coeficient_activity_mtb(1.4)
     user.user_great_goal(70)
+    user._input_sex('male')
     print(user)
     user.plan_for_callories()
     print(user.get_new_motivation())
