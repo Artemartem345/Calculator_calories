@@ -28,9 +28,10 @@ class User:
         self.sex = self._input_sex(sex)
         self.age = age or input('Enter your age: ')
 
-    def _input_sex(self, sex:str = None) -> str:
+    def _input_sex(self, sex:str):
+        self.sex = sex or input('Enter your sex: ')
         while not sex in ['male', 'female']:
-            sex = input('Enter your sex: ')
+            return sex
         
 
     def __repr__(self) -> str:
@@ -138,11 +139,11 @@ def user_init(name: str = '', middle_name: str = '', last_name: str = '') -> Use
 
 if __name__ == '__main__':
 
-    user = user_init('Artem', 'Vasilyevich', 'Popov')
+    user = user_init()
     user.base_metabolism()
     user.coeficient_activity_mtb(1.4)
-    user.user_great_goal(70)
-    user._input_sex('male')
+    user.user_great_goal()
+    user._input_sex('')
     print(user)
     user.plan_for_callories()
     print(user.get_new_motivation())
