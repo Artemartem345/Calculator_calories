@@ -113,3 +113,11 @@ class MyInterface:
 root = tk.Tk()
 my_interface = MyInterface(root)
 root.mainloop()
+'''
+
+
+у каждой функции по сути должен быть свой интерфейс, который исполняет функционал прописанный в main.py.
+
+
+
+'''
