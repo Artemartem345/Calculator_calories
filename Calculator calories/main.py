@@ -1,6 +1,8 @@
 from random import choice
 from math import fabs
 # import PyQt5 as PQ5
+from tkinter import *
+from tkinter import ttk
 
 
 list_of_motivated = [
